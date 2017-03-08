@@ -28,7 +28,7 @@ int genFloat(char* inputfile, int MAX_FLOATS)
     for (int i = 0; i < MAX_FLOATS; i++)
     {    
         float r = (1+(float)rand()/(float)RAND_MAX) * a; 
-        fprintf(in, "%f\n", r);
+        fprintf(in, "%f,", r);
     }
     fclose(in);
 

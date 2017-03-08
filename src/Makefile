@@ -14,11 +14,11 @@ heapsort.o: heapsort.c
 	gcc -c heapsort.c 
 
 # Running main with DEBUG_ENABLED flag
-main: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
-	gcc -o main getfloat.o genFloat.o heapsort.o main.c -D DEBUG_ENABLED -D HEAP_DEBUG -l m
+#maindebug: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
+#	gcc -o main getfloat.o genFloat.o heapsort.o main.c -D DEBUG_ENABLED -D HEAP_DEBUG -l m
 
-#main: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
-#	gcc -o main getfloat.o genFloat.o heapsort.o main.c -l m
+main: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
+	gcc -o main getfloat.o genFloat.o heapsort.o main.c -l m
 
 mean.o: mean.c
 	gcc -c mean.c
