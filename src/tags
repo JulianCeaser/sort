@@ -1,0 +1,49 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUILD_MAX_HEAP	heapsort.c	/^void BUILD_MAX_HEAP(float *A, int len)$/;"	f
+CHUNKS	heapsort.c	4;"	d	file:
+CHUNKS	heapsort.h	9;"	d
+DISPLAY_HEAP	heapsort.c	/^void DISPLAY_HEAP(float *A, int len)$/;"	f
+GENFLOAT_H_INCLUDED	genFloat.h	2;"	d
+GETFLOAT_H_INCLUDED	getfloat.h	2;"	d
+HEAPSORT_H_INCLUDED	heapsort.h	2;"	d
+LEFT	heapsort.c	/^int LEFT ( int i)$/;"	f
+MAX_ALLOWED_SIZE	main.c	17;"	d	file:
+MAX_FLOATS_READ_IN_HEAP	main.c	16;"	d	file:
+MAX_HEAPIFY	heapsort.c	/^void MAX_HEAPIFY (float *A, int index, int len)$/;"	f
+MAX_HEAPSORT	heapsort.c	/^void MAX_HEAPSORT (float *A, int len)    $/;"	f
+MEAN_H_INCLUDED	mean.h	2;"	d
+Node_list	main.c	/^heapNode *Node_list;$/;"	v
+PARENT	heapsort.c	/^int PARENT (int i)$/;"	f
+RESULTS_DIR	main.c	18;"	d	file:
+RIGHT	heapsort.c	/^int RIGHT ( int i)$/;"	f
+SORT_HEAP_AND_WRITE_OUTPUT	main.c	/^void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)$/;"	f
+TEST_FLAG	heapsort.c	/^int TEST_FLAG = 0;$/;"	v
+TMP	main.c	19;"	d	file:
+TOTAL_FLOATS	heapsort.c	5;"	d	file:
+TOTAL_FLOATS	heapsort.h	10;"	d
+callHeapSort	main.c	/^int callHeapSort (int total_chunks, int max_floats_read)$/;"	f
+compute_mean	mean.c	/^double compute_mean(float *A,int n)$/;"	f
+compute_sample_var	mean.c	/^double compute_sample_var(double mean, float *A, int n)$/;"	f
+floatList	main.c	/^float *floatList, *zscoreList;$/;"	v
+genFloat	genFloat.c	/^int genFloat(char* inputfile, int MAX_FLOATS)$/;"	f
+getfloat	getfloat.c	/^int getfloat(FILE *stream, float *pn)$/;"	f
+heapNode	heapsort.h	/^typedef struct heapNode{$/;"	s
+heapNode	heapsort.h	/^} heapNode ;$/;"	t	typeref:struct:heapNode
+main	main.c	/^int main(int argc, char **argv)$/;"	f
+mean	main.c	/^float mean = 0.0;$/;"	v
+merge	main.c	/^void merge(float * lst, int a, int b, int s ) $/;"	f
+mergesort	main.c	/^void mergesort(float * lst, int a, int b)$/;"	f
+openFile	heapsort.c	/^FILE* openFile(char* fileName, char* mode)$/;"	f
+printBanner	main.c	/^void printBanner()$/;"	f
+root_element	heapsort.h	/^        float *root_element;           \/\/value$/;"	m	struct:heapNode
+root_index	heapsort.h	/^        FILE* root_index;              \/\/position of the floating point number in the file$/;"	m	struct:heapNode
+standard_deviation	main.c	/^float standard_deviation = 0.0;$/;"	v
+swap	heapsort.c	/^void swap ( float *px, float *py)$/;"	f
+tmp	main.c	/^float *tmp;$/;"	v
+zscoreList	main.c	/^float *floatList, *zscoreList;$/;"	v
+zscore_calculator	main.c	/^void zscore_calculator (int total_zscores)$/;"	f
