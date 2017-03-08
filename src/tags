@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BOOSTFACTOR	process.c	1;"	d	file:
 BUILD_MAX_HEAP	heapsort.c	/^void BUILD_MAX_HEAP(float *A, int len)$/;"	f
 CHUNKS	heapsort.c	4;"	d	file:
 CHUNKS	heapsort.h	9;"	d
@@ -12,28 +13,31 @@ GENFLOAT_H_INCLUDED	genFloat.h	2;"	d
 GETFLOAT_H_INCLUDED	getfloat.h	2;"	d
 HEAPSORT_H_INCLUDED	heapsort.h	2;"	d
 LEFT	heapsort.c	/^int LEFT ( int i)$/;"	f
-MAX_ALLOWED_SIZE	main.c	17;"	d	file:
-MAX_FLOATS_READ_IN_HEAP	main.c	16;"	d	file:
+MAX_ALLOWED_SIZE	main.c	18;"	d	file:
+MAX_FLOATS_READ_IN_HEAP	main.c	17;"	d	file:
 MAX_HEAPIFY	heapsort.c	/^void MAX_HEAPIFY (float *A, int index, int len)$/;"	f
 MAX_HEAPSORT	heapsort.c	/^void MAX_HEAPSORT (float *A, int len)    $/;"	f
 MEAN_H_INCLUDED	mean.h	2;"	d
 Node_list	main.c	/^heapNode *Node_list;$/;"	v
 PARENT	heapsort.c	/^int PARENT (int i)$/;"	f
-RESULTS_DIR	main.c	18;"	d	file:
+PROCESS	process.c	/^void PROCESS(unsigned char *image, int rows, int cols, float S,$/;"	f
 RIGHT	heapsort.c	/^int RIGHT ( int i)$/;"	f
 SORT_HEAP_AND_WRITE_OUTPUT	main.c	/^void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)$/;"	f
 TEST_FLAG	heapsort.c	/^int TEST_FLAG = 0;$/;"	v
-TMP	main.c	19;"	d	file:
+TIMER	main.c	14;"	d	file:
 TOTAL_FLOATS	heapsort.c	5;"	d	file:
 TOTAL_FLOATS	heapsort.h	10;"	d
 callHeapSort	main.c	/^int callHeapSort (int total_chunks, int max_floats_read)$/;"	f
 compute_mean	mean.c	/^double compute_mean(float *A,int n)$/;"	f
 compute_sample_var	mean.c	/^double compute_sample_var(double mean, float *A, int n)$/;"	f
 floatList	main.c	/^float *floatList, *zscoreList;$/;"	v
+func1	process.c	/^void func1(unsigned char *image, int rows, int cols, float S,$/;"	f
+func3	process.c	/^void func3(short int *def, int rows, int cols,$/;"	f
 genFloat	genFloat.c	/^int genFloat(char* inputfile, int MAX_FLOATS)$/;"	f
 getfloat	getfloat.c	/^int getfloat(FILE *stream, float *pn)$/;"	f
 heapNode	heapsort.h	/^typedef struct heapNode{$/;"	s
 heapNode	heapsort.h	/^} heapNode ;$/;"	t	typeref:struct:heapNode
+magic	process.c	/^void magic(float S, float **K, int *WS)$/;"	f
 main	main.c	/^int main(int argc, char **argv)$/;"	f
 mean	main.c	/^float mean = 0.0;$/;"	v
 merge	main.c	/^void merge(float * lst, int a, int b, int s ) $/;"	f

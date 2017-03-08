@@ -11,10 +11,11 @@
 
 //#define MEAN
 //#define HEAP_DEBUG
+#define TIMER
 
 //#define MAX_FLOATS_READ_IN_HEAP 256
 #define MAX_FLOATS_READ_IN_HEAP 25000
-#define MAX_ALLOWED_SIZE  1000000
+#define MAX_ALLOWED_SIZE  1000000000
 
 float mean = 0.0;
 float standard_deviation = 0.0;
@@ -128,7 +129,7 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
 
         //Writing the Max element and its variance to merged_output.txt and zscore_output.txt respectively
         fprintf(fp_out,"%f\n",*(heap_max+j));
-        fprintf(zscore_out,"%f\n",variance);
+        fprintf(zscore_out,"%f,",variance);
 
         
         //Reading the next floating point number to replace the max number
@@ -141,7 +142,8 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
 
             if(*(heap_max+j) == *((A+k)->root_element))
             {
-                getfloat((A+k)->root_index, (A+k)->root_element) ;
+                fscanf((A+k)->root_index,"%f,",(A+k)->root_element);
+                //getfloat((A+k)->root_index, (A+k)->root_element) ;
                 
                 if( ( !feof( (A+k)->root_index) ) )
                     *(heap_max+j) = *((A+k)->root_element);
@@ -191,7 +193,8 @@ void zscore_calculator (int total_zscores)
     
     for(i=0;i<total_zscores;++i)
     {
-        getfloat(zscore_input,zscoreList);
+        //getfloat(zscore_input,zscoreList);
+        fscanf(zscore_input,"%f,",zscoreList);
         *zscoreList = *zscoreList / standard_deviation ;
         fprintf(zscore_output,"%f\n",*zscoreList);
     }
@@ -206,13 +209,9 @@ int callHeapSort (int total_chunks, int max_floats_read)
         printf("\ncallHeapSort: Received Params: total_chunks =%d max_floats_read=%d\n", total_chunks, max_floats_read);
     #endif // DEBUG_ENABLED
     
-    //int total_chunks = CHUNKS ;
-    //int max_floats_read = TOTAL_FLOATS;
     char *filename_chunk;
     FILE *fp_list;                      //List of file pointer
 
-    //FILE *fp_output; 
-    //fp_output = openFile("merged_output.txt","w");
 
     // create a dynamic array containing list of heapNode
     // size of dynamic array is set to total number of external chunks 
@@ -363,7 +362,8 @@ int main(int argc, char **argv)
                     break;
                 
                 // temporarily turned off getfloat to test speed 
-                getfloat(fp,(floatList+num_of_floats_read));     // Get each floating point number from input file
+                //getfloat(fp,(floatList+num_of_floats_read));     // Get each floating point number from input file
+                fscanf(fp,"%f,",floatList+num_of_floats_read);
                 
                 mean += *(floatList+num_of_floats_read);
                 ++num_of_floats_read ;
@@ -380,7 +380,7 @@ int main(int argc, char **argv)
                     fp1 = openFile(temp_output,"wb");
     
                     for(j=0;j<num_of_floats_read;++j)
-                        fprintf(fp1,"%f\n",*(floatList+j));
+                        fprintf(fp1,"%f,",*(floatList+j));
     
                     actual_nums_read += num_of_floats_read ;
                     
@@ -390,19 +390,23 @@ int main(int argc, char **argv)
                         printf("floatList = %p\n", floatList);
                     #endif // DEBUG ENABLED
     
+                    run_size++;
+                    
                     #ifdef TIMER
                         t1 = clock() - t1; 
                         cpu_time_used = ((double)t1)/CLOCKS_PER_SEC; // Time in seconds
-                        printf("\nMergesort for chunk %d complete. Time taken is %lf \n",run_size,cpu_time_used);
+                        printf("\n Mergesort for chunk %d complete. Time taken is %lf \n",run_size,cpu_time_used);
                     #endif /* TIMER */
-                    run_size++;
+                    
                     fclose(fp1);
                     continue;
                 }
                 
-                //If buffer is not filled then keep writing until it is or until EOF
+            }while(!feof(fp));
 
-                //mergesort(floatList,0,num_of_floats_read-1);
+
+            if( num_of_floats_read != 0 )
+            {
                 mergesort(floatList,0,num_of_floats_read);
 
                 sprintf(temp_output,"temp%d.dat",run_size);
@@ -410,20 +414,22 @@ int main(int argc, char **argv)
                 fp1 = openFile(temp_output,"wb");
 
                 for(j=0;j<num_of_floats_read;++j)
-                    fprintf(fp1,"%f\n",*(floatList+j));
+                    fprintf(fp1,"%f,",*(floatList+j));
+            }
 
-                #ifdef TIMER
-                    t1 = clock() - t1;
-                    cpu_time_used = ((double)t1)/CLOCKS_PER_SEC; // Time in seconds
-                    printf("\nMergesort for chunk %d complete. Time taken is %lf\n",run_size,cpu_time_used);
-                #endif /* TIMER */
-                
-                fclose(fp1);
+            run_size++;
 
-            }while(!feof(fp));
+            #ifdef TIMER
+                t1 = clock() - t1;
+                cpu_time_used = ((double)t1)/CLOCKS_PER_SEC; // Time in seconds
+                printf("\n Mergesort for chunk %d complete. Time taken is %lf\n",run_size,cpu_time_used);
+            #endif /* TIMER */
             
-            if ( (num_of_floats_read*run_size) == actual_nums_read )
-                run_size++; 
+            fclose(fp1);
+                
+            
+            //if ( (num_of_floats_read*run_size) == actual_nums_read )
+            //    run_size++; 
 
             t = clock() - t;    // Final Time
             cpu_time_used = ((double)t)/CLOCKS_PER_SEC; // Time in seconds
@@ -448,7 +454,6 @@ int main(int argc, char **argv)
                 printf("run_size = %d actual_nums_read=%d", run_size, actual_nums_read);
             #endif // DEBUG_ENABLED
 
-            //callHeapSort (run_size-1, (actual_nums_read+1) );
             callHeapSort (run_size, actual_nums_read);
             
             t = clock() - t;  // Final Time
