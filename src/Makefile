@@ -26,11 +26,16 @@ mean.o: mean.c
 run :
 	extSort
 
-clean:
+clean-l:
 	clear
-	-rm -f *.o
-	-rm -f *.dat
-	-rm -f *.txt
-	-rm -f main
-	-rm -f input.txt
-	-rm -f merged_output.txt
+	#$(RM) $(call FixPath,objs/*)
+	rm -f *.o
+	rm -f *.dat
+	rm -f *.txt
+	rm -f main
+
+clean-w:
+	del *.o
+	del *.dat
+	del *.txt
+	del main
