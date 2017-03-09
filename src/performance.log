@@ -1,0 +1,209 @@
+----------------------------------------------------------------------------
+Input = 1000000 numbers
+All reads done using fscanf
+
+
+ Sort Program initialised 
+ ----------------------------------
+ Mergesort started. Creating and writing to disk temporary chunks
+
+ Mergesort for chunk 1 complete. Time taken is 0.019075 
+
+ Mergesort for chunk 2 complete. Time taken is 0.015736 
+
+ Mergesort for chunk 3 complete. Time taken is 0.033718 
+
+ Mergesort for chunk 4 complete. Time taken is 0.035527 
+
+ Mergesort for chunk 5 complete. Time taken is 0.047214 
+
+ Mergesort for chunk 6 complete. Time taken is 0.049604 
+
+ Mergesort for chunk 7 complete. Time taken is 0.061671 
+
+ Mergesort for chunk 8 complete. Time taken is 0.064099 
+
+ Mergesort for chunk 9 complete. Time taken is 0.075689 
+
+ Mergesort for chunk 10 complete. Time taken is 0.077838 
+
+ Mergesort for chunk 11 complete. Time taken is 0.090242 
+
+ Mergesort for chunk 12 complete. Time taken is 0.091609 
+
+ Mergesort for chunk 13 complete. Time taken is 0.104751 
+
+ Mergesort for chunk 14 complete. Time taken is 0.105745 
+
+ Mergesort for chunk 15 complete. Time taken is 0.121737 
+
+ Mergesort for chunk 16 complete. Time taken is 0.120701 
+
+ Mergesort for chunk 17 complete. Time taken is 0.135333 
+
+ Mergesort for chunk 18 complete. Time taken is 0.134603 
+
+ Mergesort for chunk 19 complete. Time taken is 0.149448 
+
+ Mergesort for chunk 20 complete. Time taken is 0.148864 
+
+ Mergesort for chunk 21 complete. Time taken is 0.163308 
+
+ Mergesort for chunk 22 complete. Time taken is 0.163066 
+
+ Mergesort for chunk 23 complete. Time taken is 0.177125 
+
+ Mergesort for chunk 24 complete. Time taken is 0.178277 
+
+ Mergesort for chunk 25 complete. Time taken is 0.192622 
+
+ Mergesort for chunk 26 complete. Time taken is 0.194225 
+
+ Mergesort for chunk 27 complete. Time taken is 0.207564 
+
+ Mergesort for chunk 28 complete. Time taken is 0.208853 
+
+ Mergesort for chunk 29 complete. Time taken is 0.222641 
+
+ Mergesort for chunk 30 complete. Time taken is 0.224463 
+
+ Mergesort for chunk 31 complete. Time taken is 0.238220 
+
+ Mergesort for chunk 32 complete. Time taken is 0.238774 
+
+ Mergesort for chunk 33 complete. Time taken is 0.253546 
+
+ Mergesort for chunk 34 complete. Time taken is 0.253921 
+
+ Mergesort for chunk 35 complete. Time taken is 0.267761 
+
+ Mergesort for chunk 36 complete. Time taken is 0.268858 
+
+ Mergesort for chunk 37 complete. Time taken is 0.282378 
+
+ Mergesort for chunk 38 complete. Time taken is 0.282910 
+
+ Mergesort for chunk 39 complete. Time taken is 0.296609 
+
+ Mergesort for chunk 40 complete. Time taken is 0.296971 
+
+ Mergesort for chunk 41 complete. Time taken is 0.297253
+
+ Merge Sort completed. Total 41 chunks generated.
+
+ Total Time Taken to generate sorted chunks using Merge Sort is 0.593703 secs
+
+ Calling HeapSort to Merge sorted chunks 
+
+ Sorted Chunks are merged using Heap Sort and writen to output file = merged_output.txt
+
+ Variance of sorted Chunks are writen to output file = zscore_output.txt
+
+ Total time taken to Heapsort and write output file is 3.717557 secs
+
+-----------------------------------------------------------------------------------------------
+
+Input = 100000
+fscanf() used in initial chunking and sorting of chunks
+getfloat() used during heapsort. Writing of merged_output.txt zscorelist.txt
+
+ ----------------------------------
+ External Sort Program initialised 
+ ----------------------------------
+ Mergesort started. Creating and writing to disk temporary chunks
+
+ Mergesort for chunk 1 complete. Time taken is 0.013582 
+
+ Mergesort for chunk 2 complete. Time taken is 0.013686 
+
+ Mergesort for chunk 3 complete. Time taken is 0.028778 
+
+ Mergesort for chunk 4 complete. Time taken is 0.028384 
+
+ Mergesort for chunk 5 complete. Time taken is 0.043916 
+
+ Mergesort for chunk 6 complete. Time taken is 0.042433 
+
+ Mergesort for chunk 7 complete. Time taken is 0.058509 
+
+ Mergesort for chunk 8 complete. Time taken is 0.056888 
+
+ Mergesort for chunk 9 complete. Time taken is 0.074188 
+
+ Mergesort for chunk 10 complete. Time taken is 0.070874 
+
+ Mergesort for chunk 11 complete. Time taken is 0.088964 
+
+ Mergesort for chunk 12 complete. Time taken is 0.084564 
+
+ Mergesort for chunk 13 complete. Time taken is 0.104210 
+
+ Mergesort for chunk 14 complete. Time taken is 0.098794 
+
+ Mergesort for chunk 15 complete. Time taken is 0.118549 
+
+ Mergesort for chunk 16 complete. Time taken is 0.113747 
+
+ Mergesort for chunk 17 complete. Time taken is 0.133198 
+
+ Mergesort for chunk 18 complete. Time taken is 0.129246 
+
+ Mergesort for chunk 19 complete. Time taken is 0.147539 
+
+ Mergesort for chunk 20 complete. Time taken is 0.143792 
+
+ Mergesort for chunk 21 complete. Time taken is 0.161897 
+
+ Mergesort for chunk 22 complete. Time taken is 0.159173 
+
+ Mergesort for chunk 23 complete. Time taken is 0.178757 
+
+ Mergesort for chunk 24 complete. Time taken is 0.174269 
+
+ Mergesort for chunk 25 complete. Time taken is 0.194298 
+
+ Mergesort for chunk 26 complete. Time taken is 0.187842 
+
+ Mergesort for chunk 27 complete. Time taken is 0.208388 
+
+ Mergesort for chunk 28 complete. Time taken is 0.210111 
+
+ Mergesort for chunk 29 complete. Time taken is 0.224749 
+
+ Mergesort for chunk 30 complete. Time taken is 0.224323 
+
+ Mergesort for chunk 31 complete. Time taken is 0.238979 
+
+ Mergesort for chunk 32 complete. Time taken is 0.237813 
+
+ Mergesort for chunk 33 complete. Time taken is 0.253688 
+
+ Mergesort for chunk 34 complete. Time taken is 0.252072 
+
+ Mergesort for chunk 35 complete. Time taken is 0.268028 
+
+ Mergesort for chunk 36 complete. Time taken is 0.266634 
+
+ Mergesort for chunk 37 complete. Time taken is 0.282916 
+
+ Mergesort for chunk 38 complete. Time taken is 0.280663 
+
+ Mergesort for chunk 39 complete. Time taken is 0.300509 
+
+ Mergesort for chunk 40 complete. Time taken is 0.294471 
+
+ Mergesort for chunk 41 complete. Time taken is 0.300942
+
+ Merge Sort completed. Total 41 chunks generated.
+
+ Total Time Taken to generate sorted chunks using Merge Sort is 0.594969 secs
+
+ Calling HeapSort to Merge sorted chunks 
+
+ Sorted Chunks are merged using Heap Sort and writen to output file = merged_output.txt
+
+ Variance of sorted Chunks are writen to output file = zscore_output.txt
+
+ Total time taken to Heapsort and write output file is 4.123396 secs
+
+-----------------------------------------------------------------------------------------------------

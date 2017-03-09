@@ -2,43 +2,32 @@
 #  target: dependencies
 #  	action
 
-all: getfloat.o genFloat.o heapsort.o main
+UNAME := $(shell uname)
 
-getfloat.o: getfloat.c
-	gcc -c getfloat.c
+ifeq ($(UNAME), Linux)
+	DELETE = rm -f
+else
+	DELETE = del
+endif
 
-genFloat.o: genFloat.c
-	gcc -c genFloat.c
+src = $(wildcard *.c)
+obj = $(src:.c=.o)
+dep = $(obj:.o=.d) # one dependency file for each source
 
-heapsort.o: heapsort.c
-	gcc -c heapsort.c 
+CFLAGS = -g -lm
 
-# Running main with DEBUG_ENABLED flag
-#maindebug: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
-#	gcc -o main getfloat.o genFloat.o heapsort.o main.c -D DEBUG_ENABLED -D HEAP_DEBUG -l m
+main: $(obj)
+	$(CC) -o $@ $^ $(CFLAGS)
 
-main: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
-	gcc -o main getfloat.o genFloat.o heapsort.o main.c -l m
+-include $(dep) # include all dep files in the makefile
 
-main.o: main.c
-	gcc -c main.c
+# rule to generate a dep file by using the C preprocessor
 
-mean.o: mean.c
-	gcc -c mean.c
+%.d: %.c
+	@$(CC) $(CFLAGS) $< -MM -MT $(@:h=.o) >$@
 
-run :
-	extSort
+.PHONY: clean
 
-clean-l:
+clean:
 	clear
-	rm -f *.o
-	rm -f *.dat
-	rm -f *.txt
-	rm -f main
-	rm -f temp*
-
-clean-w:
-	del *.o
-	del *.dat
-	del *.txt
-	del main
+	$(DELETE) *.o *.txt temp* main
