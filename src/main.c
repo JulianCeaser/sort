@@ -11,7 +11,7 @@
 
 //#define MEAN
 //#define HEAP_DEBUG
-#define TIMER
+//#define TIMER
 
 //#define MAX_FLOATS_READ_IN_HEAP 256
 #define MAX_FLOATS_READ_IN_HEAP 25000
@@ -154,7 +154,7 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
                     #endif // HEAP_DEBUG
 
                     *(heap_max+j) = -1.0;
-                    fclose( (A+k)->root_index );
+                    fclose( (A+k)->root_index );          // Closing each open temporary file
                     j--;
                 }
                 break;
@@ -179,6 +179,7 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
     
     free (heap_max);
     fclose(zscore_out);
+    fclose(fp_out);
 }
  
 void zscore_calculator (int total_zscores)
@@ -201,6 +202,7 @@ void zscore_calculator (int total_zscores)
 
     fclose(zscore_input);
     fclose(zscore_output);
+
 } 
 
 int callHeapSort (int total_chunks, int max_floats_read)
@@ -211,6 +213,7 @@ int callHeapSort (int total_chunks, int max_floats_read)
     
     char *filename_chunk;
     FILE *fp_list;                      //List of file pointer
+    int i, status;
 
 
     // create a dynamic array containing list of heapNode
@@ -228,12 +231,12 @@ int callHeapSort (int total_chunks, int max_floats_read)
     
     filename_chunk = (char *)malloc(sizeof(char*));
 
-    for(int i=0;i<total_chunks;++i)
+    for(i=0;i<total_chunks;++i)
     {   
         Node_list->root_index = (FILE *)malloc(sizeof(FILE));
         Node_list->root_element = (float *)malloc(sizeof(float));
     
-        sprintf(filename_chunk,"temp%d.dat",i);
+        sprintf(filename_chunk,"temp%d",i);
         fp_list = openFile(filename_chunk,"rb");
     
         //Storing file pointer index in the Nodelist
@@ -272,9 +275,24 @@ int callHeapSort (int total_chunks, int max_floats_read)
     printf ("\n Sorted Chunks are merged using Heap Sort and writen to output file = merged_output.txt\n");
     printf ("\n Variance of sorted Chunks are writen to output file = zscore_output.txt\n");
     
+    
+
+    for(i=0;i<total_chunks;++i)
+    {
+        sprintf(filename_chunk,"temp%d",i);
+        status = remove(filename_chunk);
+        if(status != 0)
+        {
+            printf("Unable to delete %s",filename_chunk);
+            perror("Error");
+        }
+    }
+            
+    printf("\n All temp file deleted successfully.\n");
+
     if(Node_list != NULL )
         free(Node_list);
-
+    
     return 1;
 
 
@@ -361,7 +379,7 @@ int main(int argc, char **argv)
             {
                 for (num_of_floats_read=0;num_of_floats_read<MAX_FLOATS_READ_IN_HEAP;++num_of_floats_read)
                 {
-                    if( fscanf(fp,"%f,",floatList+num_of_floats_read) == 0 );
+                    if( fscanf(fp,"%f,",floatList+num_of_floats_read) == 0 )
                     {
                         printf("\n Invalid input received. Please use proper input and try again. \n");
                         exit(1);
@@ -377,7 +395,7 @@ int main(int argc, char **argv)
 
                 mergesort(floatList,0,num_of_floats_read);
                 
-                sprintf(temp_output,"temp%d.dat",run_size);
+                sprintf(temp_output,"temp%d",run_size);
                 fp1 = openFile(temp_output,"wb");
 
                 for (int j=0; j<num_of_floats_read; j++)
@@ -496,9 +514,9 @@ int main(int argc, char **argv)
             
             t = clock(); // Initial Time
             
-           // #ifdef DEBUG_ENABLED
+            #ifdef DEBUG_ENABLED
                 printf("run_size = %d actual_nums_read=%d", run_size, actual_nums_read);
-           // #endif // DEBUG_ENABLED
+            #endif // DEBUG_ENABLED
             
             if(run_size>1)
                 callHeapSort (run_size, actual_nums_read);
@@ -510,7 +528,7 @@ int main(int argc, char **argv)
                 fp_out = openFile("merged_output.txt","wb");
                 zscore_out = openFile("variance_output.txt","wb");
 
-                sprintf(temp_output,"temp%d.dat",run_size-1);
+                sprintf(temp_output,"temp%d",run_size-1);
                 fp = openFile(temp_output,"rb");
 
                 for(i=0;i<actual_nums_read;++i)
@@ -523,13 +541,25 @@ int main(int argc, char **argv)
                 }
 
                 standard_deviation = sqrt(sum_of_variance);
+                fclose(fp_out);
                 fclose(zscore_out);
                 
                 printf ("\n Sorted Chunks are merged using Heap Sort and writen to output file = merged_output.txt\n");
                 printf ("\n Variance of sorted Chunks are writen to output file = zscore_output.txt\n");
     
                 if(Node_list != NULL )
-                free(Node_list);
+                    free(Node_list);
+
+
+                int status = remove(temp_output);
+                if(status == 0)
+                    printf("\n %s file deleted successfully.\n",temp_output);
+                else
+                {
+                    printf("Unable to delete %s",temp_output);
+                    perror("Error");
+                }
+                fclose(fp);
 
             }
                     

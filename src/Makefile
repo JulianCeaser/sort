@@ -20,6 +20,9 @@ heapsort.o: heapsort.c
 main: getfloat.h getfloat.o genFloat.h genFloat.o heapsort.h heapsort.o main.c
 	gcc -o main getfloat.o genFloat.o heapsort.o main.c -l m
 
+main.o: main.c
+	gcc -c main.c
+
 mean.o: mean.c
 	gcc -c mean.c
 
@@ -32,6 +35,7 @@ clean-l:
 	rm -f *.dat
 	rm -f *.txt
 	rm -f main
+	rm -f temp*
 
 clean-w:
 	del *.o

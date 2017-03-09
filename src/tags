@@ -24,7 +24,6 @@ PROCESS	process.c	/^void PROCESS(unsigned char *image, int rows, int cols, float
 RIGHT	heapsort.c	/^int RIGHT ( int i)$/;"	f
 SORT_HEAP_AND_WRITE_OUTPUT	main.c	/^void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)$/;"	f
 TEST_FLAG	heapsort.c	/^int TEST_FLAG = 0;$/;"	v
-TIMER	main.c	14;"	d	file:
 TOTAL_FLOATS	heapsort.c	5;"	d	file:
 TOTAL_FLOATS	heapsort.h	10;"	d
 callHeapSort	main.c	/^int callHeapSort (int total_chunks, int max_floats_read)$/;"	f
