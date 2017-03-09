@@ -14,8 +14,8 @@
 //#define TIMER
 
 //#define MAX_FLOATS_READ_IN_HEAP 256
-#define MAX_FLOATS_READ_IN_HEAP 2500
-#define MAX_ALLOWED_SIZE  10000
+#define MAX_FLOATS_READ_IN_HEAP 2500000
+#define MAX_ALLOWED_SIZE  10000000
 
 float mean = 0.0;
 float standard_deviation = 0.0;
@@ -221,12 +221,12 @@ int callHeapSort (int total_chunks, int max_floats_read)
     Node_list = (heapNode*)malloc(sizeof(heapNode)*total_chunks);
 
     // intialize memory for root_index 
-    Node_list->root_index = (FILE *)malloc(sizeof(FILE));
+    //Node_list->root_index = (FILE *)malloc(sizeof(FILE));
     // intialize memory for root_element 
-    Node_list->root_element = (float *)malloc(sizeof(float));
+    //Node_list->root_element = (float *)malloc(sizeof(float));
 
     // List to maintain file descriptors for reading each external chunk
-    fp_list = (FILE *)malloc(sizeof(FILE)*total_chunks);
+    //fp_list = (FILE *)malloc(sizeof(FILE)*total_chunks);
 
     
     filename_chunk = (char *)malloc(sizeof(char*));
@@ -290,8 +290,19 @@ int callHeapSort (int total_chunks, int max_floats_read)
             
     printf("\n All temp file deleted successfully.\n");
 
-    if(Node_list != NULL )
-        free(Node_list);
+    free(filename_chunk);
+
+    //for(i=0;i<total_chunks;i++)
+    //{
+    if(Node_list->root_element != NULL)
+        free(Node_list->root_element);
+        //Node_list++; 
+    //}
+    
+    //Node_list = Node_list - total_chunks;
+
+    //if(Node_list != NULL )
+        //free(Node_list);
     
     return 1;
 

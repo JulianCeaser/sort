@@ -96,13 +96,20 @@ void MAX_HEAPIFY (float *A, int index, int len)
         printf("LEFT = %d\nRIGHT=%d\n largest_index=%d Heap size = %d\n", l, r, largest_index, len);
     #endif
 
-    if ((l < len ) && (*(A+l) > *(A+i)))
-          largest_index = l;
-    else
+    if (l < len )
+    { 
+        if (*(A+l) > *(A+i))
+            largest_index = l;    
+        else
           largest_index = i;
+    }
 
-    if ((r< len) && (*(A+r) > *(A+largest_index)))
-        largest_index= r;
+    if (r< len)
+    { 
+            if (*(A+r) > *(A+largest_index))
+                largest_index= r;
+    }
+    
     if (largest_index != i )
     {
         #ifdef DEBUG_ENABLED
