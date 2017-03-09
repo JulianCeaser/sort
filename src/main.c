@@ -14,8 +14,11 @@
 //#define TIMER
 
 //#define MAX_FLOATS_READ_IN_HEAP 256
-#define MAX_FLOATS_READ_IN_HEAP 250000
-#define MAX_ALLOWED_SIZE  1000000
+//#define MAX_FLOATS_READ_IN_HEAP 1000000
+//#define MAX_ALLOWED_SIZE  10000000
+
+#define MAX_FLOATS_READ_IN_HEAP 2500000
+#define MAX_ALLOWED_SIZE  10000000
 
 float mean = 0.0;
 float standard_deviation = 0.0;
@@ -129,7 +132,7 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
 
         //Writing the Max element and its variance to merged_output.txt and zscore_output.txt respectively
         fprintf(fp_out,"%f\n",*(heap_max+j));
-        fprintf(zscore_out,"%f,",variance);
+        fprintf(zscore_out,"%f\n",variance);
 
         
         //Reading the next floating point number to replace the max number
@@ -142,7 +145,7 @@ void SORT_HEAP_AND_WRITE_OUTPUT (heapNode *A, int total_chunks, int max_floats)
 
             if(*(heap_max+j) == *((A+k)->root_element))
             {
-                fscanf((A+k)->root_index,"%f,",(A+k)->root_element);
+                fscanf((A+k)->root_index,"%f\n",(A+k)->root_element);
                 //getfloat((A+k)->root_index, (A+k)->root_element) ;
                 
                 if( ( !feof( (A+k)->root_index) ) )
@@ -195,7 +198,7 @@ void zscore_calculator (int total_zscores)
     for(i=0;i<total_zscores;++i)
     {
         //getfloat(zscore_input,zscoreList);
-        fscanf(zscore_input,"%f,",zscoreList);
+        fscanf(zscore_input,"%f\n",zscoreList);
         *zscoreList = *zscoreList / standard_deviation ;
         fprintf(zscore_output,"%f\n",*zscoreList);
     }
@@ -245,7 +248,7 @@ int callHeapSort (int total_chunks, int max_floats_read)
 
         //Getfloat takes the filepointer fp and stores the root element into Nodelist->root_element
         //printf("\nfp_list = %p, Node_list->root_element = %p",fp_list,Node_list->root_element);
-        fscanf(fp_list,"%f,",Node_list->root_element);
+        fscanf(fp_list,"%f\n",Node_list->root_element);
         if ((Node_list->root_element) == NULL)
         {
             perror("Root element is null");
@@ -390,7 +393,7 @@ int main(int argc, char **argv)
             {
                 for (num_of_floats_read=0;num_of_floats_read<MAX_FLOATS_READ_IN_HEAP;++num_of_floats_read)
                 {
-                    if( fscanf(fp,"%f,",floatList+num_of_floats_read) == 0 )
+                    if( fscanf(fp,"%f\n",floatList+num_of_floats_read) == 0 )
                     {
                         printf("\n Invalid input received. Please use proper input and try again. \n");
                         exit(1);
@@ -410,7 +413,7 @@ int main(int argc, char **argv)
                 fp1 = openFile(temp_output,"wb");
 
                 for (int j=0; j<num_of_floats_read; j++)
-                    fprintf(fp1,"%f,",*(floatList+j));
+                    fprintf(fp1,"%f\n",*(floatList+j));
 
                 #ifdef TIMER
                     t1 = clock() - t1; 
@@ -424,87 +427,7 @@ int main(int argc, char **argv)
                 fclose(fp1);
             }
 
-            //actual_nums_read--;
             fclose(fp);
-
-/*            while(!feof(fp))  
-            {
-                if( feof(fp) )
-                    break;
-                
-                // temporarily turned off getfloat to test speed 
-                //getfloat(fp,(floatList+num_of_floats_read));     // Get each floating point number from input file
-                fscanf(fp,"%f,",floatList+num_of_floats_read);
-                
-                ++num_of_floats_read ;
-                //printf("\nSum of floating point inputs = %f",mean);
-    
-
-                //If Buffer is filled then write out to temp files
-                if(num_of_floats_read  == MAX_FLOATS_READ_IN_HEAP)
-                {
-                    mergesort(floatList,0, num_of_floats_read-1);
-    
-                    sprintf(temp_output,"temp%d.dat",run_size);
-                    //fp1 = openFile(temp_output,"w");
-                    fp1 = openFile(temp_output,"wb");
-    
-                    for(j=0;j<num_of_floats_read;++j)
-                        fprintf(fp1,"%f,",*(floatList+j));
-    
-                    actual_nums_read += num_of_floats_read ;
-                    
-                    //reset pointer to floatList to the beginning of the memory
-                    num_of_floats_read=0;
-                    #ifdef DEBUG_ENABLED 
-                        printf("floatList = %p\n", floatList);
-                    #endif // DEBUG ENABLED
-    
-                    run_size++;
-                    
-                    #ifdef TIMER
-                        t1 = clock() - t1; 
-                        cpu_time_used = ((double)t1)/CLOCKS_PER_SEC; // Time in seconds
-                        printf("\n Mergesort for chunk %d complete. Time taken is %lf \n",run_size,cpu_time_used);
-                    #endif // TIMER 
-                    
-                    fclose(fp1);
-                    continue;
-                }
-                
-            }
-
-            //++num_of_floats_read;
-
-
-            if( num_of_floats_read > 0 )
-            {
-                fscanf(fp,"%f,",floatList+num_of_floats_read-1);
-                //printf("\nValue of float read = %f, num_of_floats_read = %d",*(floatList+num_of_floats_read),num_of_floats_read);
-                mergesort(floatList,0,i);
-
-                sprintf(temp_output,"temp%d.dat",run_size);
-                //fp1 = openFile(temp_output,"w");
-                fp1 = openFile(temp_output,"wb");
-
-                for(j=0;j<i;++j)
-                    fprintf(fp1,"%f,",*(floatList+j));
-            }
-
-            run_size++;
-
-            #ifdef TIMER
-                t1 = clock() - t1;
-                cpu_time_used = ((double)t1)/CLOCKS_PER_SEC; // Time in seconds
-                printf("\n Mergesort for chunk %d complete. Time taken is %lf\n",run_size,cpu_time_used);
-            #endif // TIMER 
-            
-            fclose(fp1);
-                
-            */
-
-            //if ( (num_of_floats_read*run_size) == actual_nums_read )
-            //    run_size++; 
 
             t = clock() - t;    // Final Time
             cpu_time_used = ((double)t)/CLOCKS_PER_SEC; // Time in seconds
@@ -548,7 +471,7 @@ int main(int argc, char **argv)
                     sum_of_variance = sum_of_variance + (variance*variance);
         
                     fprintf(fp_out,"%f\n",*(floatList+i));
-                    fprintf(zscore_out,"%f,",variance);
+                    fprintf(zscore_out,"%f\n",variance);
                 }
 
                 standard_deviation = sqrt(sum_of_variance);

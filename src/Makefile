@@ -10,6 +10,7 @@ else
 	DELETE = del
 endif
 
+CC = gcc
 src = $(wildcard *.c)
 obj = $(src:.c=.o)
 dep = $(obj:.o=.d) # one dependency file for each source
@@ -30,4 +31,4 @@ main: $(obj)
 
 clean:
 	clear
-	$(DELETE) *.o *.txt temp* main
+	$(DELETE) *.o *.txt temp* main *.*swp
