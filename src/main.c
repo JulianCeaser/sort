@@ -14,8 +14,8 @@
 //#define TIMER
 
 //#define MAX_FLOATS_READ_IN_HEAP 256
-#define MAX_FLOATS_READ_IN_HEAP 2500000
-#define MAX_ALLOWED_SIZE  10000000
+#define MAX_FLOATS_READ_IN_HEAP 250000
+#define MAX_ALLOWED_SIZE  1000000
 
 float mean = 0.0;
 float standard_deviation = 0.0;
