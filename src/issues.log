@@ -1,0 +1,6 @@
+Known issues 
+-------------
+
+Segmentation fault when input greater than 1,000,000 ( 1 million ).
+
+If Total number of inputs is a multiple of buffer size then an extra empty temp file is generated.
