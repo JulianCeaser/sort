@@ -361,7 +361,11 @@ int main(int argc, char **argv)
             {
                 for (num_of_floats_read=0;num_of_floats_read<MAX_FLOATS_READ_IN_HEAP;++num_of_floats_read)
                 {
-                    fscanf(fp,"%f,",floatList+num_of_floats_read);
+                    if( fscanf(fp,"%f,",floatList+num_of_floats_read) == 0 );
+                    {
+                        printf("\n Invalid input received. Please use proper input and try again. \n");
+                        exit(1);
+                    }
                     //getfloat(fp,(floatList+num_of_floats_read));
                     mean += *(floatList+num_of_floats_read);
                     if( feof(fp) )
